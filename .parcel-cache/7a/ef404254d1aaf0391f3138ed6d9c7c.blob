@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Basics</title>
+    <link href="002f4f24810ac718db927b1c41a5514c" rel="stylesheet">
+    
+    <style data-parcel-key="ff4d0cde9557fd381fafaa1d8ab7c749">
+      @import "./src/styles/app.css";
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Wave to Bin converter</h1>
+    </header>
+
+    <div>
+      <section id="converter">
+        <input type="file" accept="audio/*" id="input-files" multiple="">
+        <div id="file-list"></div>
+        <div id="btn-actions">
+          <button type="button" id="btn-convert">Convert</button>
+        </div>
+        <a hidden="" download="lancy_mem_flash.bin" id="result">Result</a>
+      </section>
+    </div>
+
+    <div id="output" style="5a0bf8d9c743f7f620c8d51dfa34d8b8"></div>
+    <script data-parcel-key="a10cdcad9ce7a298be19d73850a98638">
+      import "./src/scripts/app.js";
+    </script> 
+  </body>
+</html>

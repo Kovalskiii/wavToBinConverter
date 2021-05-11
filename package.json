@@ -1,0 +1,22 @@
+{
+  "name": "wav-to-bin-converter",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "wav-to-bin-converter",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "@babel/core": "7.14.0",
+    "@babel/preset-env": "7.14.1",
+    "arcsecond": "3.2.0",
+    "arcsecond-binary": "2.0.0",
+    "parcel": "2.0.0-beta.2",
+    "wav-header-parser": "1.0.3"
+  },
+  "keywords": [],
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
+}

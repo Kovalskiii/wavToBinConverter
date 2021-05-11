@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Basics</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+    
+    <style>* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", open-sans;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  background: #023d6d;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  width: 100%;
+  height: 100%;
+}
+
+#converter {
+  margin: 5rem auto;
+  width: 40rem;
+  max-width: 90%;
+  border-radius: 10px;
+  padding: 1rem;
+  color: #023d6d;
+  text-align: center;
+}
+
+#converter input {
+  font: inherit;
+  font-size: 1.5rem;
+  width: 28rem;
+  padding: 0.45rem;
+  margin: 2rem auto;
+  display: block;
+  color: #023d6d;
+  text-align: center;
+}
+
+#converter input:focus {
+  outline: none;
+}
+
+#btn-actions {
+  /* margin-top: 15rem; */
+  text-align: center;
+}
+
+#converter button {
+  font: inherit;
+  font-size: 30px;
+  background: #4caf50;
+  color: white;
+  border: 2px solid #023d6d;
+  padding: 0.5rem;
+  margin: 30px;
+  cursor: pointer;
+  border-radius: 4px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#converter button:focus {
+  outline: none;
+}
+#converter button:hover,
+#converter button:active {
+  background: #1f7d23;
+  border-color: #023d6d;
+}
+
+#file-list {
+  overflow: auto;
+  height: 350px;
+  box-sizing: border-box;
+  border: 2px solid #023d6d;
+}
+
+
+</style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Wave to Bin converter</h1>
+    </header>
+
+    <div>
+      <section id="converter">
+        <input type="file" accept="audio/*" id="input-files" multiple="">
+        <div id="file-list"></div>
+        <div id="btn-actions">
+          <button type="button" id="btn-convert">Convert</button>
+        </div>
+        <a hidden="" download="lancy_mem_flash.bin" id="result">Result</a>
+      </section>
+    </div>
+
+    <div id="output" style="font-family: 'Courier New', monospace;"></div>
+    <script>// modules are defined as an array
+// [ module function, map of requires ]
+//
+// map of requires is short require name -> numeric require
+//
+// anything defined in a previous bundle is accessed via the
+// orig method which is the require for previous bundles
+
+(function(modules, cache, entry, mainEntry, globalName) {
+  /* eslint-disable no-undef */
+  var globalObject =
+    typeof globalThis !== 'undefined'
+      ? globalThis
+      : typeof self !== 'undefined'
+      ? self
+      : typeof window !== 'undefined'
+      ? window
+      : typeof global !== 'undefined'
+      ? global
+      : {};
+  /* eslint-enable no-undef */
+
+  // Save the require from previous bundle to this closure if any
+  var previousRequire =
+    typeof globalObject.parcelRequire === 'function' &&
+    globalObject.parcelRequire;
+  // Do not use `require` to prevent Webpack from trying to bundle this call
+  var nodeRequire =
+    typeof module !== 'undefined' &&
+    typeof module.require === 'function' &&
+    module.require.bind(module);
+
+  function newRequire(name, jumped) {
+    if (!cache[name]) {
+      if (!modules[name]) {
+        // if we cannot find the module within our internal map or
+        // cache jump to the current global require ie. the last bundle
+        // that was added to the page.
+        var currentRequire =
+          typeof parcelRequire === 'function' && parcelRequire;
+        if (!jumped && currentRequire) {
+          return currentRequire(name, true);
+        }
+
+        // If there are other bundles on this page the require from the
+        // previous one is saved to 'previousRequire'. Repeat this as
+        // many times as there are bundles until the module is found or
+        // we exhaust the require chain.
+        if (previousRequire) {
+          return previousRequire(name, true);
+        }
+
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
+        var err = new Error("Cannot find module '" + name + "'");
+        err.code = 'MODULE_NOT_FOUND';
+        throw err;
+      }
+
+      localRequire.resolve = resolve;
+      localRequire.cache = {};
+
+      var module = (cache[name] = new newRequire.Module(name));
+
+      modules[name][0].call(
+        module.exports,
+        localRequire,
+        module,
+        module.exports,
+        this
+      );
+    }
+
+    return cache[name].exports;
+
+    function localRequire(x) {
+      return newRequire(localRequire.resolve(x));
+    }
+
+    function resolve(x) {
+      return modules[name][1][x] || x;
+    }
+  }
+
+  function Module(moduleName) {
+    this.id = moduleName;
+    this.bundle = newRequire;
+    this.exports = {};
+  }
+
+  newRequire.isParcelRequire = true;
+  newRequire.Module = Module;
+  newRequire.modules = modules;
+  newRequire.cache = cache;
+  newRequire.parent = previousRequire;
+  newRequire.register = function(id, exports) {
+    modules[id] = [
+      function(require, module) {
+        module.exports = exports;
+      },
+      {},
+    ];
+  };
+
+  globalObject.parcelRequire = newRequire;
+
+  for (var i = 0; i < entry.length; i++) {
+    newRequire(entry[i]);
+  }
+
+  if (mainEntry) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(mainEntry);
+
+    // CommonJS
+    if (typeof exports === 'object' && typeof module !== 'undefined') {
+      module.exports = mainExports;
+
+      // RequireJS
+    } else if (typeof define === 'function' && define.amd) {
+      define(function() {
+        return mainExports;
+      });
+
+      // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
+  }
+})({"1ka92":[function(require,module,exports) {
+var global = arguments[3];
+var HMR_HOST = null;
+var HMR_PORT = 1234;
+var HMR_ENV_HASH = "d751713988987e9331980363e24189ce";
+module.bundle.HMR_BUNDLE_ID = "4b6eb8dd762dc0e508d23bd3d2c821df";
+/* global HMR_HOST, HMR_PORT, HMR_ENV_HASH */
+
+var OVERLAY_ID = '__parcel__error__overlay__';
+var OldModule = module.bundle.Module;
+
+function Module(moduleName) {
+  OldModule.call(this, moduleName);
+  this.hot = {
+    data: module.bundle.hotData,
+    _acceptCallbacks: [],
+    _disposeCallbacks: [],
+    accept: function (fn) {
+      this._acceptCallbacks.push(fn || function () {});
+    },
+    dispose: function (fn) {
+      this._disposeCallbacks.push(fn);
+    }
+  };
+  module.bundle.hotData = null;
+}
+
+module.bundle.Module = Module;
+var checkedAssets, assetsToAccept, acceptedAssets; // eslint-disable-next-line no-redeclare
+
+var parent = module.bundle.parent;
+
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+  var hostname = HMR_HOST || (location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
+  var port = HMR_PORT || location.port;
+  var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+  var ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/');
+
+  ws.onmessage = function (event) {
+    checkedAssets = {};
+    assetsToAccept = [];
+    acceptedAssets = {};
+    var data = JSON.parse(event.data);
+
+    if (data.type === 'update') {
+      // Remove error overlay if there is one
+      removeErrorOverlay();
+      let assets = data.assets.filter(asset => asset.envHash === HMR_ENV_HASH); // Handle HMR Update
+
+      var handled = false;
+      assets.forEach(asset => {
+        var didAccept = asset.type === 'css' || hmrAcceptCheck(global.parcelRequire, asset.id);
+
+        if (didAccept) {
+          handled = true;
+        }
+      });
+
+      if (handled) {
+        console.clear();
+        assets.forEach(function (asset) {
+          hmrApply(global.parcelRequire, asset);
+        });
+
+        for (var i = 0; i < assetsToAccept.length; i++) {
+          var id = assetsToAccept[i][1];
+
+          if (!acceptedAssets[id]) {
+            hmrAcceptRun(assetsToAccept[i][0], id);
+          }
+        }
+      } else {
+        window.location.reload();
+      }
+    }
+
+    if (data.type === 'error') {
+      // Log parcel errors to console
+      for (let ansiDiagnostic of data.diagnostics.ansi) {
+        let stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
+        console.error('🚨 [parcel]: ' + ansiDiagnostic.message + '\n' + stack + '\n\n' + ansiDiagnostic.hints.join('\n'));
+      } // Render the fancy html overlay
+
+
+      removeErrorOverlay();
+      var overlay = createErrorOverlay(data.diagnostics.html);
+      document.body.appendChild(overlay);
+    }
+  };
+
+  ws.onerror = function (e) {
+    console.error(e.message);
+  };
+
+  ws.onclose = function (e) {
+    console.warn('[parcel] 🚨 Connection to the HMR server was lost');
+  };
+}
+
+function removeErrorOverlay() {
+  var overlay = document.getElementById(OVERLAY_ID);
+
+  if (overlay) {
+    overlay.remove();
+    console.log('[parcel] ✨ Error resolved');
+  }
+}
+
+function createErrorOverlay(diagnostics) {
+  var overlay = document.createElement('div');
+  overlay.id = OVERLAY_ID;
+  let errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
+
+  for (let diagnostic of diagnostics) {
+    let stack = diagnostic.codeframe ? diagnostic.codeframe : diagnostic.stack;
+    errorHTML += `
+      <div>
+        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">
+          🚨 ${diagnostic.message}
+        </div>
+        <pre>
+          ${stack}
+        </pre>
+        <div>
+          ${diagnostic.hints.map(hint => '<div>' + hint + '</div>').join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  errorHTML += '</div>';
+  overlay.innerHTML = errorHTML;
+  return overlay;
+}
+
+function getParents(bundle, id) {
+  var modules = bundle.modules;
+
+  if (!modules) {
+    return [];
+  }
+
+  var parents = [];
+  var k, d, dep;
+
+  for (k in modules) {
+    for (d in modules[k][1]) {
+      dep = modules[k][1][d];
+
+      if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
+        parents.push([bundle, k]);
+      }
+    }
+  }
+
+  if (bundle.parent) {
+    parents = parents.concat(getParents(bundle.parent, id));
+  }
+
+  return parents;
+}
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    if (link.parentNode !== null) {
+      link.parentNode.removeChild(link);
+    }
+  };
+
+  newLink.setAttribute('href', link.getAttribute('href').split('?')[0] + '?' + Date.now());
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute('href');
+      var absolute = /^https?:\/\//i.test(href) && href.indexOf(window.location.origin) !== 0;
+
+      if (!absolute) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+function hmrApply(bundle, asset) {
+  var modules = bundle.modules;
+
+  if (!modules) {
+    return;
+  }
+
+  if (modules[asset.id] || !bundle.parent) {
+    if (asset.type === 'css') {
+      reloadCSS();
+    } else {
+      var fn = new Function('require', 'module', 'exports', asset.output);
+      modules[asset.id] = [fn, asset.depsByBundle[bundle.HMR_BUNDLE_ID]];
+    }
+  } else if (bundle.parent) {
+    hmrApply(bundle.parent, asset);
+  }
+}
+
+function hmrAcceptCheck(bundle, id) {
+  var modules = bundle.modules;
+
+  if (!modules) {
+    return;
+  }
+
+  if (!modules[id] && bundle.parent) {
+    return hmrAcceptCheck(bundle.parent, id);
+  }
+
+  if (checkedAssets[id]) {
+    return;
+  }
+
+  checkedAssets[id] = true;
+  var cached = bundle.cache[id];
+  assetsToAccept.push([bundle, id]);
+
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    return true;
+  }
+
+  return getParents(global.parcelRequire, id).some(function (v) {
+    return hmrAcceptCheck(v[0], v[1]);
+  });
+}
+
+function hmrAcceptRun(bundle, id) {
+  var cached = bundle.cache[id];
+  bundle.hotData = {};
+
+  if (cached && cached.hot) {
+    cached.hot.data = bundle.hotData;
+  }
+
+  if (cached && cached.hot && cached.hot._disposeCallbacks.length) {
+    cached.hot._disposeCallbacks.forEach(function (cb) {
+      cb(bundle.hotData);
+    });
+  }
+
+  delete bundle.cache[id];
+  bundle(id);
+  cached = bundle.cache[id];
+
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    cached.hot._acceptCallbacks.forEach(function (cb) {
+      var assetsToAlsoAccept = cb(function () {
+        return getParents(global.parcelRequire, id);
+      });
+
+      if (assetsToAlsoAccept && assetsToAccept.length) {
+        assetsToAccept.push.apply(assetsToAccept, assetsToAlsoAccept);
+      }
+    });
+  }
+
+  acceptedAssets[id] = true;
+}
+},{}],"1SvMK":[function(require,module,exports) {
+"use strict";
+
+require("./src/scripts/app.js");
+},{"./src/scripts/app.js":"4iIwc"}],"4iIwc":[function(require,module,exports) {
+"use strict";
+
+var _wavParser = require("./wavParser");
+
+const filesInput = document.getElementById("input-files");
+const convertBtn = document.getElementById("btn-convert");
+const fileList = document.getElementById("file-list");
+
+filesInput.onchange = ev => {
+  console.log(ev);
+  fileList.innerHTML = [...filesInput.files].map(file => `<div> ${file.name}</div>`).join("\n");
+};
+
+const validateWav = o => {
+  const {
+    rawData,
+    filename
+  } = o;
+  const header = (0, _wavParser.wavParser)(rawData);
+  console.log(header);
+
+  if (!header) {
+    console.error({
+      header,
+      filename
+    });
+    return { ...o,
+      isValid: false,
+      errorMessage: `Parsing error happened in ${o.filename}`
+    };
+  }
+
+  return { ...o,
+    isValid: true,
+    errorMessage: "The format is wrong"
+  };
+};
+
+function convertFile(file) {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader();
+    reader.readAsBinaryString(file);
+
+    reader.onload = () => {
+      let binaryData = reader.result;
+      const fileConcat = convertToHex(binaryData);
+      resolve(validateWav({
+        rawData: binaryData,
+        hexData: fileConcat,
+        filename: file.name
+      }));
+    };
+
+    reader.onerror = () => reject(reader.error);
+  });
+}
+
+async function convert() {
+  if (filesInput.files.length === 0) {
+    alert("No files chosen!");
+    return;
+  }
+
+  const hexifiedItemsPromises = [...filesInput.files].map(convertFile);
+  const hexifiedItems = await Promise.all(hexifiedItemsPromises);
+  const anyErrors = hexifiedItems.filter(x => !x.isValid);
+
+  if (anyErrors.length !== 0) {
+    alert(anyErrors.map(x => x.errorMessage).join("\n"));
+    console.error({
+      anyErrors
+    });
+    return;
+  }
+
+  const concated = hexifiedItems.map(x => x.hexData).join("\n\n\n\n"); //console.log({ concated });
+
+  const url = URL.createObjectURL(new Blob([concated], {
+    type: "text/plain;charset=utf-8"
+  }));
+  const result = document.getElementById("result");
+  result.setAttribute("href", url);
+  result.click(); // convertFile(files);
+}
+
+function convertToHex(file) {
+  return Array.from(file, (_, i) => file.charCodeAt(i).toString(16).padStart(2, "0")).join(" ");
+}
+
+convertBtn.addEventListener("click", convert);
+},{"./wavParser":"7KsDK"}],"7KsDK":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.wavParser = wavParser;
+
+function wavParser(byteString) {
+  let chunkID = byteString.charAt(0) + byteString.charAt(1) + byteString.charAt(2) + byteString.charAt(3);
+  const format = byteString.charAt(8) + byteString.charAt(9) + byteString.charAt(10) + byteString.charAt(11);
+  let subChunk1ID = byteString.charAt(12) + byteString.charAt(13) + byteString.charAt(14) + byteString.charAt(15);
+
+  if (chunkID != "RIFF" || format != "WAVE" || subChunk1ID != "fmt ") {
+    console.error("Wrong type of file!");
+    return;
+  }
+
+  let fileSize = byteString.charCodeAt(7).toString(16) + byteString.charCodeAt(6).toString(16) + byteString.charCodeAt(5).toString(16) + byteString.charCodeAt(4).toString(16);
+  const chunkSize = parseInt(fileSize, 16);
+  let length = byteString.charCodeAt(19).toString(16) + byteString.charCodeAt(18).toString(16) + byteString.charCodeAt(17).toString(16) + byteString.charCodeAt(16).toString(16);
+  const subChunk1Size = parseInt(length, 16);
+  let formatType = byteString.charCodeAt(21).toString(16) + byteString.charCodeAt(20).toString(16);
+  const audioFormat = parseInt(formatType, 16);
+  let channels = byteString.charCodeAt(23).toString(16) + byteString.charCodeAt(22).toString(16);
+  const numChannels = parseInt(channels, 16);
+  let sampleRateRaw = byteString.charCodeAt(27).toString(16) + byteString.charCodeAt(26).toString(16) + byteString.charCodeAt(25).toString(16) + byteString.charCodeAt(24).toString(16);
+  const sampleRate = parseInt(sampleRateRaw, 16);
+  let byteRateRaw = byteString.charCodeAt(31).toString(16) + byteString.charCodeAt(30).toString(16) + byteString.charCodeAt(29).toString(16) + byteString.charCodeAt(28).toString(16);
+  const byteRate = parseInt(byteRateRaw, 16);
+  let BlockAlignRaw = byteString.charCodeAt(33).toString(16) + byteString.charCodeAt(32).toString(16);
+  const blockAlign = parseInt(BlockAlignRaw, 16);
+  let bitsPerSampleRaw = byteString.charCodeAt(35).toString(16) + byteString.charCodeAt(34).toString(16);
+  const bitsPerSample = parseInt(bitsPerSampleRaw, 16);
+  const subChunk2ID = byteString.charAt(36) + byteString.charAt(37) + byteString.charAt(38) + byteString.charAt(39);
+  let sizeOfData = byteString.charCodeAt(43).toString(16) + byteString.charCodeAt(42).toString(16) + byteString.charCodeAt(41).toString(16) + byteString.charCodeAt(40).toString(16);
+  const subChunk2Size = parseInt(sizeOfData, 16);
+  return {
+    chunkID,
+    chunkSize,
+    format,
+    subChunk1ID,
+    subChunk1Size,
+    audioFormat,
+    numChannels,
+    sampleRate,
+    byteRate,
+    blockAlign,
+    bitsPerSample,
+    subChunk2ID,
+    subChunk2Size
+  };
+}
+},{}]},{},["1ka92","1SvMK"], "1SvMK", null)
+
+</script> 
+  </body>
+</html>
